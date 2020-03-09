@@ -31,11 +31,6 @@
   register: current_users
   when: linux_users.users is defined and is_kitchen is defined
 
-- name: Debugging
-  debug:
-    msg: '{{ item }}'
-  with_items: '{{ current_users.stdout_lines }}'
-
 - name: Delete unmanaged users
   user:
     name: '{{ item }}'
@@ -43,10 +38,3 @@
     remove: yes
   with_items: "{{ current_users.stdout_lines }}"
   when: item not in linux_users.users | map(attribute='username')
-
-#- name: Delete unmanaged home directories
-#  file:
-#    path: "/home/{{ item }}"
-#    state: absent
-#  with_items: "{{ current_users.stdout_lines }}"
-#  when: item not in linux_users.users | map(attribute='username')
