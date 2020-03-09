@@ -42,7 +42,7 @@ The following variables are required:
 The following variables are optional:
 
 1. `linux_users.root_key` - The SSH key(s) used by root. If left undefined then root's authorized_keys file is deleted
-2. `linux_base.users` - User objects with the following variables. If left undefined then users are not managed
+2. `linux_users.users` - User objects with the following variables. If left undefined then users are not managed
     ```
     users:
       - username: pgibbons
