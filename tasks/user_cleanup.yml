@@ -1,0 +1,52 @@
+---
+#
+# Project:: Ansible Role - Linux Users
+#
+# Copyright 2020, Route 1337, LLC, All Rights Reserved.
+#
+# Maintainers:
+# - Matthew Ahrenstein: matthew@route1337.com
+#
+# See LICENSE
+#
+
+# Delete and cleanup after users in /home/ that aren't on one of the 3 groups
+# created by this role
+
+- name: Get list of home directories in /home/
+  shell:
+    cmd: |
+      set -o pipefail
+      ls -l /home/ | awk '{print $9}'
+    executable: /bin/bash
+  register: current_users
+  when: linux_users.users is defined and is_kitchen is not defined
+
+- name: Get list of home directories in /home/ except vagrant
+  shell:
+    cmd: |
+      set -o pipefail
+      ls -l /home/ | grep -v vagrant | awk '{print $9}'
+    executable: /bin/bash
+  register: current_users
+  when: linux_users.users is defined and is_kitchen is defined
+
+- name: Debugging
+  debug:
+    msg: '{{ item }}'
+  with_items: '{{ current_users.stdout_lines }}'
+
+- name: Delete unmanaged users
+  user:
+    name: '{{ item }}'
+    state: absent
+    remove: yes
+  with_items: "{{ current_users.stdout_lines }}"
+  when: item not in linux_users.users | map(attribute='username')
+
+#- name: Delete unmanaged home directories
+#  file:
+#    path: "/home/{{ item }}"
+#    state: absent
+#  with_items: "{{ current_users.stdout_lines }}"
+#  when: item not in linux_users.users | map(attribute='username')

@@ -1,9 +1,9 @@
-Ansible Role - CHANGEME: Changelog
+Ansible Role - Linux Users: Changelog
 =====================================
 A list of all the changes made to this repo and the role it contains
 
 Version 1.0.0
--------------
+------------
 
 1. Initial Release of repository
 

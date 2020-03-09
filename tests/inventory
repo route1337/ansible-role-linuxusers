@@ -1,5 +1,5 @@
 #
-# Project:: Ansible Role - CHANGEME
+# Project:: Ansible Role - Linux Users
 #
 # Copyright 2020, Route 1337, LLC, All Rights Reserved.
 #

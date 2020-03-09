@@ -1,5 +1,5 @@
 #
-# Project:: Ansible Role - CHANGEME
+# Project:: Ansible Role - Linux Users
 #
 # Copyright 2020, Route 1337, LLC, All Rights Reserved.
 #
@@ -9,10 +9,4 @@
 # See LICENSE
 #
 
-# Prereqs tests
-
-if os[:name] == 'ubuntu'
-  # Do something
-else
-  # Do nothing
-end
+# There should be no code here

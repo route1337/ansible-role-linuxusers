@@ -1,0 +1,30 @@
+---
+#
+# Project:: Ansible Role - Linux Users
+#
+# Copyright 2020, Route 1337, LLC, All Rights Reserved.
+#
+# Maintainers:
+# - Matthew Ahrenstein: matthew@route1337.com
+#
+# See LICENSE
+#
+
+# Create and update users
+
+- name: Add/update all specified users
+  user:
+    name: '{{ item.username }}'
+    shell: '/bin/bash'
+    comment: '{{ item.comment }}'
+    create_home: yes
+    group: '{{ item.group }}'
+  with_items: "{{ linux_users.users }}"
+
+- name: Add/update all specified users' SSH keys
+  authorized_key:
+    user: '{{ item.username }}'
+    key: '{{ item.key }}'
+    state: present
+    exclusive: yes
+  with_items: "{{ linux_users.users }}"

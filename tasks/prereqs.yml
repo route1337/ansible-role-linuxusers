@@ -1,6 +1,6 @@
 ---
 #
-# Project:: Ansible Role - CHANGEME
+# Project:: Ansible Role - Linux Users
 #
 # Copyright 2020, Route 1337, LLC, All Rights Reserved.
 #
@@ -10,7 +10,38 @@
 # See LICENSE
 #
 
-# Manage prerequisites for this role
+# Configure the prerequisites for user management
 
-- name: CHANGEME
-  command: echo "CHANGEME"
+- name: Create an admin group for password-less sudo options
+  group:
+    gid: 1337
+    name: sysadmins
+    state: present
+
+- name: Create a group for non-admins
+  group:
+    gid: 8737
+    name: sysusers
+    state: present
+
+- name: Create a group for service accounts (password-less sudo)
+  group:
+    gid: 7782
+    name: svcaccounts
+    state: present
+
+- name: Set sysadmins to have password-less sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^sysadmins'
+    line: 'sysadmins ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+
+- name: Set svcaccounts to have password-less sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^svcaccounts'
+    line: 'svcaccounts ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'

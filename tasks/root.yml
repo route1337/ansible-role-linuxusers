@@ -1,0 +1,33 @@
+---
+#
+# Project:: Ansible Role - Linux Users
+#
+# Copyright 2020, Route 1337, LLC, All Rights Reserved.
+#
+# Maintainers:
+# - Matthew Ahrenstein: matthew@route1337.com
+#
+# See LICENSE
+#
+
+# Manage the root user
+
+- name: Configure root's password
+  user:
+    name: root
+    password: '{{ linux_users.root_password }}'
+    update_password: always
+
+- name: Configure root's SSH keys
+  authorized_key:
+    user: root
+    key: '{{ linux_users.root_key }}'
+    state: present
+    exclusive: yes
+  when: linux_users.root_key is defined
+
+- name: Delete root's authorized_keys file
+  file:
+    path: /root/.ssh/authorized_keys
+    state: absent
+  when: linux_users.root_key is not defined

@@ -1,6 +1,6 @@
 ---
 #
-# Project:: Ansible Role - CHANGEME
+# Project:: Ansible Role - Linux Users
 #
 # Copyright 2020, Route 1337, LLC, All Rights Reserved.
 #
@@ -10,7 +10,15 @@
 # See LICENSE
 #
 
-# CHANGEME ROLE DESCRIPTION
+# Manage user accounts and sudo privileges across Linux servers
 
 - import_tasks: prereqs.yml
   when: ansible_distribution == 'Ubuntu'
+- import_tasks: root.yml
+  when: ansible_distribution == 'Ubuntu'
+- import_tasks: users.yml
+  when: ansible_distribution == 'Ubuntu' and linux_users.users is defined
+- import_tasks: kitchen_testing.yml
+  when: ansible_distribution == 'Ubuntu' and is_kitchen is defined
+- import_tasks: user_cleanup.yml
+  when: ansible_distribution == 'Ubuntu' and linux_users.users is defined

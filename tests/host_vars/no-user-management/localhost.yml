@@ -1,0 +1,19 @@
+---
+#
+# Project:: Ansible Role - Linux Users
+#
+# Copyright 2020, Route 1337, LLC, All Rights Reserved.
+#
+# Maintainers:
+# - Matthew Ahrenstein: matthew@route1337.com
+#
+# See LICENSE
+#
+
+# Testing variables for Linux Users
+
+linux_users:
+  root_password: "$6$i1.aY3d9$xSnxa38gJ9MEOH0brIQeP2K51daP.ljTX9/vQcLR16jmMp7hTAZyBpYwuGfodbxAZdpuTI7g1CEFmTOtCBOcY1"
+
+# The below variable should not be defined outside of Kitchen as it creates a user to test deletion with
+is_kitchen: True

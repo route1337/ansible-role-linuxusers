@@ -1,0 +1,33 @@
+---
+#
+# Project:: Ansible Role - Linux Users
+#
+# Copyright 2020, Route 1337, LLC, All Rights Reserved.
+#
+# Maintainers:
+# - Matthew Ahrenstein: matthew@route1337.com
+#
+# See LICENSE
+#
+
+# Create a test user for verifying user cleanup works
+# This only runs if is_kitchen is defined
+
+- name: Create a test user called "baduser" outside of inventory to verify the user cleanup works
+  user:
+    name: 'baduser'
+    shell: '/bin/bash'
+    comment: 'BAD USER'
+    create_home: yes
+    group: 'users'
+
+- name: Give the test user "baduser" an SSH key
+  authorized_key:
+    user: 'baduser'
+    key: "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHz\
+      D8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8Hfd\
+      OV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbU\
+      vxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vag\
+      rant insecure public key"
+    state: present
+    exclusive: yes
