@@ -15,4 +15,5 @@
 # Run the single role in this repo on all linux systems
 - hosts: kitchen
   roles:
+    - '/tmp/kitchen/roles/roles/generate-test-data'
     - '/tmp/kitchen/roles'

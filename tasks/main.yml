@@ -18,7 +18,5 @@
   when: ansible_distribution == 'Ubuntu'
 - import_tasks: users.yml
   when: ansible_distribution == 'Ubuntu' and linux_users.users is defined
-- import_tasks: kitchen_testing.yml
-  when: ansible_distribution == 'Ubuntu' and is_kitchen is defined
 - import_tasks: user_cleanup.yml
   when: ansible_distribution == 'Ubuntu' and linux_users.users is defined
