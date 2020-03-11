@@ -63,8 +63,8 @@ The following variables are optional:
 
 The following variables should only be used in testing:
 
-1. `is_kitchen` - If this variable is defined test users are created and logic changes to exclude the vagrant user from
-management
+1. `is_kitchen` - If this variable is defined the role(s) in `tests/roles` create sample users for testing unapproved user
+deletion against. Additionally the `user_cleanup.yml` play will exempt the `vagrant` user from deletion 
 
 Testing
 -------

@@ -10,8 +10,7 @@
 # See LICENSE
 #
 
-# Create a test user for verifying user cleanup works
-# This only runs if is_kitchen is defined
+# Generate some test users to assist in testing the role
 
 - name: Create a test user called "baduser" outside of inventory to verify the user cleanup works
   user:

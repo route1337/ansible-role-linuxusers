@@ -1,0 +1,16 @@
+---
+#
+# Project:: Ansible Role - Linux Users
+#
+# Copyright 2020, Route 1337, LLC, All Rights Reserved.
+#
+# Maintainers:
+# - Matthew Ahrenstein: matthew@route1337.com
+#
+# See LICENSE
+#
+
+# Manage setting variables and users for the Test Kitchen environment
+
+- import_tasks: sample-users.yml
+  when: ansible_distribution == 'Ubuntu'

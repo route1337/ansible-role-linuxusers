@@ -33,6 +33,7 @@ suites:
       playbook: tests/playbooks/repo-role.yml
       hosts: kitchen
       roles_path: .
+      additional_copy_role_path: tests/roles
       ansible_inventory: tests/inventory
       host_vars_path: tests/host_vars/standard
     verifier:
@@ -45,6 +46,7 @@ suites:
       playbook: tests/playbooks/repo-role.yml
       hosts: kitchen
       roles_path: .
+      additional_copy_role_path: tests/roles
       ansible_inventory: tests/inventory
       host_vars_path: tests/host_vars/no-user-management
     verifier:
