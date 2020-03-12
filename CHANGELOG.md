@@ -2,6 +2,13 @@ Ansible Role - Linux Users: Changelog
 =====================================
 A list of all the changes made to this repo and the role it contains
 
+Version 1.0.2
+-------------
+
+1. Due to the fact that Ansible will configure a variable as defined and set some data in it as skipped if the task that
+creates it is skipped, the vagrant user exemption for user cleanup now uses a different variable name and different
+deletion block.
+
 Version 1.0.1
 -------------
 

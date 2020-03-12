@@ -22,13 +22,13 @@
   register: current_users
   when: linux_users.users is defined and is_kitchen is not defined
 
-- name: Get list of home directories in /home/ except vagrant
+- name: (Test Kitchen) Get list of home directories in /home/ except vagrant
   shell:
     cmd: |
       set -o pipefail
       ls -l /home/ | grep -v vagrant | awk '{print $9}'
     executable: /bin/bash
-  register: current_users
+  register: kitchen_current_users
   when: linux_users.users is defined and is_kitchen is defined
 
 - name: Delete unmanaged users
@@ -37,4 +37,13 @@
     state: absent
     remove: yes
   with_items: "{{ current_users.stdout_lines }}"
-  when: item not in linux_users.users | map(attribute='username')
+  when: is_kitchen is not defined and (item not in linux_users.users | map(attribute='username'))
+
+- name: (Test Kitchen) Delete unmanaged users
+  user:
+    name: '{{ item }}'
+    state: absent
+    remove: yes
+  with_items: "{{ kitchen_current_users.stdout_lines }}"
+  when:
+    is_kitchen is defined and (item not in linux_users.users | map(attribute='username'))
