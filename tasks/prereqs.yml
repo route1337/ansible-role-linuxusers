@@ -34,14 +34,14 @@
   lineinfile:
     dest: /etc/sudoers
     state: present
-    regexp: '^sysadmins'
-    line: 'sysadmins ALL=(ALL) NOPASSWD: ALL'
+    regexp: '^[%]sysadmins'
+    line: '%sysadmins ALL=(ALL) NOPASSWD: ALL'
     validate: 'visudo -cf %s'
 
 - name: Set svcaccounts to have password-less sudo
   lineinfile:
     dest: /etc/sudoers
     state: present
-    regexp: '^svcaccounts'
-    line: 'svcaccounts ALL=(ALL) NOPASSWD: ALL'
+    regexp: '^[%]svcaccounts'
+    line: '%svcaccounts ALL=(ALL) NOPASSWD: ALL'
     validate: 'visudo -cf %s'

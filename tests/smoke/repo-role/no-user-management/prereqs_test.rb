@@ -33,8 +33,7 @@ if os[:name] == 'ubuntu'
 
   # Verify sysadmins and svcaccounts have password-less sudo and sysusers do not get mentioned
   describe file('/etc/sudoers') do
-    its('content') { should match /sysadmins ALL=\(ALL\) NOPASSWD: ALL/ }
-    its('content') { should match /sysadmins ALL=\(ALL\) NOPASSWD: ALL/ }
+    its('content') { should match /%sysadmins ALL=\(ALL\) NOPASSWD: ALL/ }
     its('content') { should_not match /sysusers/ }
   end
 

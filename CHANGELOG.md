@@ -2,6 +2,12 @@ Ansible Role - Linux Users: Changelog
 =====================================
 A list of all the changes made to this repo and the role it contains
 
+Version 1.0.3
+-------------
+
+1. Fixed an issue with the sysadmins and svcaccounts groups being specified as users and not groups in `/etc/sudoers`
+(Missing `%`)
+
 Version 1.0.2
 -------------
 
