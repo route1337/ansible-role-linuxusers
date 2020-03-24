@@ -46,7 +46,7 @@ The following variables are optional:
     ```
     users:
       - username: pgibbons
-        key: ssh-rsa BLAH BLAH BLAH
+        key: "ssh-rsa BLAH BLAH BLAH"
         comment: Peter Gibbons
         group: sysadmins
       - username: mbolton
@@ -54,9 +54,7 @@ The following variables are optional:
         comment: Michael Bolton
         group: sysusers
       - username: svc-ghactions
-        key: |
-          ssh-rsa BLAH BLAH BLAH
-          ssh-rsa BLEH BLEH BLEH
+        key: ssh-rsa BLAH BLAH BLAH\nssh-rsa BLEH BLEH BLEH"
         comment: ServiceAccount-GitHub Actions
         group: svcaccounts
     ```
