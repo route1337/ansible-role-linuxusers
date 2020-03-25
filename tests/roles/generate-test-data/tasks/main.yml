@@ -13,4 +13,4 @@
 # Manage setting variables and users for the Test Kitchen environment
 
 - import_tasks: sample-users.yml
-  when: ansible_distribution == 'Ubuntu'
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'CentOS'

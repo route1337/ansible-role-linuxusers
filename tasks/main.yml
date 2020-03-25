@@ -13,10 +13,10 @@
 # Manage user accounts and sudo privileges across Linux servers
 
 - import_tasks: prereqs.yml
-  when: ansible_distribution == 'Ubuntu'
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'CentOS'
 - import_tasks: root.yml
-  when: ansible_distribution == 'Ubuntu'
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'CentOS'
 - import_tasks: users.yml
-  when: ansible_distribution == 'Ubuntu' and linux_users.users is defined
+  when: (ansible_distribution == 'Ubuntu' and linux_users.users is defined) or (ansible_distribution == 'CentOS' and linux_users.users is defined)
 - import_tasks: user_cleanup.yml
-  when: ansible_distribution == 'Ubuntu' and linux_users.users is defined
+  when: (ansible_distribution == 'Ubuntu' and linux_users.users is defined) or (ansible_distribution == 'CentOS' and linux_users.users is defined)

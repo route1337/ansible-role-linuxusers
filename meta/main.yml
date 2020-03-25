@@ -13,7 +13,7 @@
 galaxy_info:
   role_name: "linux_users"
   author: "Matthew Ahrenstein"
-  description: "Extremely basic user account management for Ubuntu servers"
+  description: "Extremely basic user account management for Ubuntu and CentOS servers"
   company: "Route 1337, LLC"
   license: "license (MIT)"
   min_ansible_version: "2.4"
@@ -22,6 +22,10 @@ galaxy_info:
       versions:
         - xenial
         - bionic
+    - name: EL
+      versions:
+        - 7
+        - 8
   galaxy_tags:
     - base
     - system

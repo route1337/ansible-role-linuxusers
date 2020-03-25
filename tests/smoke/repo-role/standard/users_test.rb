@@ -11,7 +11,7 @@
 
 # Test the creation and updating of users
 
-if os[:name] == 'ubuntu'
+if ['ubuntu', 'centos'].include?(os[:name])
 
   # Verify the sample user "pgibbons" was created
   describe user('pgibbons') do

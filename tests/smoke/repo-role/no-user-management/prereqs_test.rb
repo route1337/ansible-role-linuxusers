@@ -11,7 +11,7 @@
 
 # Prereqs tests
 
-if os[:name] == 'ubuntu'
+if ['ubuntu', 'centos'].include?(os[:name])
 
   # Verify the sysadmins group exists
   describe group('sysadmins') do
