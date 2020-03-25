@@ -11,7 +11,7 @@
 
 # Test the deletion and cleanup of unapproved users
 
-if os[:name] == 'ubuntu'
+if ['ubuntu', 'centos'].include?(os[:name])
 
   # Verify the sample user "baduser" still exists
   describe user('baduser') do

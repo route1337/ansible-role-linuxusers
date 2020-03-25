@@ -11,7 +11,7 @@
 
 # Test the root user settings using test data
 
-if os[:name] == 'ubuntu'
+if ['ubuntu', 'centos'].include?(os[:name])
 
   # Verify the root user's password was set
   describe file('/etc/shadow') do
