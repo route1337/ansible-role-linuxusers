@@ -16,6 +16,7 @@
   user:
     name: root
     password: '{{ linux_users.root_password }}'
+    shell: '{{ zsh_path }}'
     update_password: always
 
 - name: Configure root's SSH keys

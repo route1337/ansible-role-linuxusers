@@ -15,7 +15,7 @@
 - name: Add/update all specified users
   user:
     name: '{{ item.username }}'
-    shell: '/bin/bash'
+    shell: '{{ zsh_path }}'
     comment: '{{ item.comment }}'
     create_home: yes
     group: '{{ item.group }}'

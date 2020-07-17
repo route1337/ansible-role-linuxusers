@@ -2,6 +2,12 @@ Ansible Role - Linux Users: Changelog
 =====================================
 A list of all the changes made to this repo and the role it contains
 
+Version 1.2.2
+-------------
+
+1. Install zsh if it's missing
+2. Users now use zsh as their default shell
+
 Version 1.2.1
 -------------
 
