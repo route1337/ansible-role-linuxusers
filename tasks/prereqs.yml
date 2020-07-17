@@ -27,7 +27,7 @@
   yum:
     name: zsh
     state: present
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_distribution == "CentOS"
 
 - name: Create an admin group for password-less sudo options
   group:
