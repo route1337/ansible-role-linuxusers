@@ -11,6 +11,16 @@
 
 # Test the creation and updating of users
 
+if os[:name] == 'ubuntu'
+  zsh_path = '/usr/bin/zsh'
+
+elsif os[:name] == 'centos'
+  zsh_path = '/bin/zsh'
+
+else
+  # Do nothing
+end
+
 if ['ubuntu', 'centos'].include?(os[:name])
 
   # Verify the sample user "pgibbons" was created
@@ -19,7 +29,7 @@ if ['ubuntu', 'centos'].include?(os[:name])
     its('gid') { should eq 8737 }
     its('group') { should eq 'sysusers' }
     its('home') { should eq '/home/pgibbons' }
-    its('shell') { should eq '/bin/bash' }
+    its('shell') { should eq "#{zsh_path}" }
   end
 
   # Verify the sample user "pgibbons" has the correct SSH key(s)
@@ -37,7 +47,7 @@ if ['ubuntu', 'centos'].include?(os[:name])
     its('gid') { should eq 1337 }
     its('group') { should eq 'sysadmins' }
     its('home') { should eq '/home/ahrenstein' }
-    its('shell') { should eq '/bin/bash' }
+    its('shell') { should eq "#{zsh_path}" }
   end
 
   # Verify the sample user "ahrenstein" has the correct SSH key(s)
@@ -55,7 +65,7 @@ if ['ubuntu', 'centos'].include?(os[:name])
     its('gid') { should eq 7782 }
     its('group') { should eq 'svcaccounts' }
     its('home') { should eq '/home/svc-ghactions' }
-    its('shell') { should eq '/bin/bash' }
+    its('shell') { should eq "#{zsh_path}" }
   end
 
   # Verify the sample user "svc-ghactions" has the correct SSH key(s)

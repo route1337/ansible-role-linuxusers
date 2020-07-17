@@ -12,6 +12,23 @@
 
 # Configure the prerequisites for user management
 
+- name: (Ubuntu) Refresh apt cache
+  apt:
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu"
+
+- name: (Ubuntu) Install the zsh package
+  apt:
+    name: zsh
+    state: present
+  when: ansible_distribution == "Ubuntu"
+
+- name: (CentOS) Install the zsh package
+  yum:
+    name: zsh
+    state: present
+  when: ansible_distribution == "CentOS"
+
 - name: Create an admin group for password-less sudo options
   group:
     gid: 1337

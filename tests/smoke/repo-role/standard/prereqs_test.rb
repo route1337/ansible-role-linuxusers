@@ -13,6 +13,11 @@
 
 if ['ubuntu', 'centos'].include?(os[:name])
 
+  # Verify zsh is installed
+  describe package('zsh') do
+    it { should be_installed }
+  end
+
   # Verify the sysadmins group exists
   describe group('sysadmins') do
     it { should exist }

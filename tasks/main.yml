@@ -12,6 +12,10 @@
 
 # Manage user accounts and sudo privileges across Linux servers
 
+- name: Set distribution specific variables
+  include_vars: '{{ item }}'
+  with_first_found:
+    - '{{ ansible_distribution }}.yml'
 - import_tasks: prereqs.yml
   when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'CentOS'
 - import_tasks: root.yml
