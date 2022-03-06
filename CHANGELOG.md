@@ -2,6 +2,11 @@ Ansible Role - Linux Users: Changelog
 =====================================
 A list of all the changes made to this repo and the role it contains
 
+Version 1.2.3
+-------------
+
+1. Adding missing `test-kitchen` gem to Gemfile
+
 Version 1.2.2
 -------------
 
