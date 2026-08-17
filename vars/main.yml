@@ -1,3 +1,4 @@
+---
 #
 # Project:: Ansible Role - Linux Users
 #
@@ -9,4 +10,6 @@
 # See LICENSE
 #
 
-# There should be no code here
+# Variables used internally by this role
+
+zsh_path: "/usr/bin/zsh"

@@ -12,21 +12,17 @@
 
 galaxy_info:
   role_name: "linux_users"
+  namespace: route1337
   author: "Matthew Ahrenstein"
-  description: "Extremely basic user account management for Ubuntu and CentOS servers"
+  description: "Extremely basic user account management for Ubuntu servers"
   company: "Route 1337 LLC"
-  license: "license (MIT)"
-  min_ansible_version: "2.8"
+  license: "MIT"
+  min_ansible_version: "2.15"
   platforms:
     - name: Ubuntu
       versions:
-        - focal
-        - jammy
         - noble
-    - name: EL
-      versions:
-        - 7
-        - 8
+        - resolute
   galaxy_tags:
     - base
     - system

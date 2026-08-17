@@ -12,15 +12,16 @@
 
 # Manage user accounts and sudo privileges across Linux servers
 
-- name: Set distribution specific variables
-  include_vars: '{{ item }}'
-  with_first_found:
-    - '{{ ansible_distribution }}.yml'
-- import_tasks: prereqs.yml
-  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'CentOS'
-- import_tasks: root.yml
-  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'CentOS'
-- import_tasks: users.yml
-  when: (ansible_distribution == 'Ubuntu' and linux_users.users is defined) or (ansible_distribution == 'CentOS' and linux_users.users is defined)
-- import_tasks: user_cleanup.yml
-  when: (ansible_distribution == 'Ubuntu' and linux_users.users is defined) or (ansible_distribution == 'CentOS' and linux_users.users is defined)
+- name: Prep prereqs
+  ansible.builtin.import_tasks: prereqs.yml
+
+- name: Manage the root user
+  ansible.builtin.import_tasks: root.yml
+
+- name: Manage non-root users
+  ansible.builtin.import_tasks: users.yml
+  when: linux_users.users is defined
+
+- name: Clean up unmanaged users
+  ansible.builtin.import_tasks: user_cleanup.yml
+  when: linux_users.users is defined
