@@ -13,22 +13,22 @@
 # Manage the root user
 
 - name: Configure root's password
-  user:
+  ansible.builtin.user:
     name: root
     password: '{{ linux_users.root_password }}'
     shell: '{{ zsh_path }}'
     update_password: always
 
 - name: Configure root's SSH keys
-  authorized_key:
+  ansible.posix.authorized_key:
     user: root
     key: '{{ linux_users.root_key }}'
     state: present
-    exclusive: yes
+    exclusive: true
   when: linux_users.root_key is defined
 
 - name: Delete root's authorized_keys file
-  file:
+  ansible.builtin.file:
     path: /root/.ssh/authorized_keys
     state: absent
   when: linux_users.root_key is not defined

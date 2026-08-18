@@ -17,15 +17,21 @@ Changes performed:
 3. Manage non-root users
     1. Create, Update, Delete user accounts
     2. Create, Update, Delete user home directories
-    3. Manage user SSH keys 
+    3. Manage user SSH keys
     4. Manage user group membership (It's expected to use one of the above groups)
+
+Requirements
+------------
+This role targets Ubuntu 24.04 and newer and assumes Ubuntu without running any distribution checks.
+
+SSH key management uses `ansible.posix`, so the full `ansible` package is required rather than bare `ansible-core`.
 
 Caveats
 -------
 There are a few caveats to this role to be aware of:
 
 1. root's password should be pre-encrypted
-2. Using multiple SSH keys can be done in one of two ways due to the use of `exclusive: yes`:
+2. Using multiple SSH keys can be done in one of two ways due to the use of `exclusive: true`:
     1. a single string with newline characters between keys
     2. Pointing to a GitHub keys URL
 3. All non-root users will not have a password set as sudo will be password-less and they aren't expected to have local
@@ -59,19 +65,12 @@ The following variables are optional:
         group: svcaccounts
     ```
 
-The following variables should only be used in testing:
-
-1. `is_kitchen` - If this variable is defined the role(s) in `tests/roles` create sample users for testing unapproved user
-deletion against. Additionally the `user_cleanup.yml` play will exempt the `vagrant` user from deletion 
-
 Testing
 -------
-This role is fully tested via Test Kitchen using sample inventory data contained in this repo.  
-[TESTING.md](TESTING.md) contains details and instructions for testing. 
+[TESTING.md](TESTING.md) contains details and instructions for testing.
 
 Donate To Support This Ansible Role
 -----------------------------------
 Route 1337 LLC's open source code heavily relies on donations. If you find this Ansible role useful, please consider using the GitHub Sponsors button to show your continued support.
 
 Thank you for your support!
-

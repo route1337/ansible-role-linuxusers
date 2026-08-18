@@ -2,6 +2,17 @@ Ansible Role - Linux Users: Changelog
 =====================================
 A list of all the changes made to this repo and the role it contains
 
+Version 1.5.0
+-------------
+
+1. Test Kitchen removed
+2. Added Ubuntu 26.04 support
+3. Removed support for anything below 24.04
+4. Removed CentOS support
+5. All tasks now use fully qualified collection names
+   1. SSH key management is now explicitly `ansible.posix.authorized_key`
+6. User cleanup now enumerates `/home/` with `ansible.builtin.find` instead of parsing `ls`
+
 Version 1.4.0
 -------------
 

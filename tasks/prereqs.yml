@@ -12,52 +12,44 @@
 
 # Configure the prerequisites for user management
 
-- name: (Ubuntu) Refresh apt cache
-  apt:
-    update_cache: yes
-  when: ansible_distribution == "Ubuntu"
+- name: Refresh apt cache
+  ansible.builtin.apt:
+    update_cache: true
 
-- name: (Ubuntu) Install the zsh package
-  apt:
+- name: Install the zsh package
+  ansible.builtin.apt:
     name: zsh
     state: present
-  when: ansible_distribution == "Ubuntu"
-
-- name: (CentOS) Install the zsh package
-  yum:
-    name: zsh
-    state: present
-  when: ansible_distribution == "CentOS"
 
 - name: Create an admin group for password-less sudo options
-  group:
+  ansible.builtin.group:
     gid: 1337
     name: sysadmins
     state: present
 
 - name: Create a group for non-admins
-  group:
+  ansible.builtin.group:
     gid: 8737
     name: sysusers
     state: present
 
 - name: Create a group for service accounts (password-less sudo)
-  group:
+  ansible.builtin.group:
     gid: 7782
     name: svcaccounts
     state: present
 
 - name: Set sysadmins to have password-less sudo
-  lineinfile:
-    dest: /etc/sudoers
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
     state: present
     regexp: '^[%]sysadmins'
     line: '%sysadmins ALL=(ALL) NOPASSWD: ALL'
     validate: 'visudo -cf %s'
 
 - name: Set svcaccounts to have password-less sudo
-  lineinfile:
-    dest: /etc/sudoers
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
     state: present
     regexp: '^[%]svcaccounts'
     line: '%svcaccounts ALL=(ALL) NOPASSWD: ALL'

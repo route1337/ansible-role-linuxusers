@@ -13,36 +13,17 @@
 # Delete and cleanup after users in /home/ that aren't on one of the 3 groups
 # created by this role
 
-- name: Get list of home directories in /home/
-  shell:
-    cmd: |
-      set -o pipefail
-      ls -l /home/ | awk '{print $9}'
-    executable: /bin/bash
-  register: current_users
-  when: linux_users.users is defined and is_kitchen is not defined
-
-- name: (Test Kitchen) Get list of home directories in /home/ except ubuntu
-  shell:
-    cmd: |
-      set -o pipefail
-      ls -l /home/ | grep -v ubuntu | awk '{print $9}'
-    executable: /bin/bash
-  register: kitchen_current_users
-  when: linux_users.users is defined and is_kitchen is defined
+- name: Find home directories in /home/
+  ansible.builtin.find:
+    paths: /home
+    file_type: directory
+    recurse: false
+  register: home_dirs
 
 - name: Delete unmanaged users
-  user:
+  ansible.builtin.user:
     name: '{{ item }}'
     state: absent
-    remove: yes
-  with_items: "{{ current_users.stdout_lines }}"
-  when: is_kitchen is not defined and (item not in linux_users.users | map(attribute='username'))
-
-- name: (Test Kitchen) Delete unmanaged users
-  user:
-    name: '{{ item }}'
-    state: absent
-    remove: yes
-  with_items: "{{ kitchen_current_users.stdout_lines }}"
-  when: is_kitchen is defined and (item not in linux_users.users | map(attribute='username'))
+    remove: true
+  loop: "{{ home_dirs.files | map(attribute='path') | map('basename') | list }}"
+  when: item not in linux_users.users | map(attribute='username') | list
